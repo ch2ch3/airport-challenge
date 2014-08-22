@@ -10,18 +10,21 @@ require 'airport'
 describe Airport do
 
   let(:airport) { Airport.new }
+  let(:plane)   { Plane.new }
   
   context 'taking off and landing' do
-    it 'a plane can land' do
+
+    xit 'a plane can land' do
     end
     
-    it 'a plane can take off' do
+    xit 'a plane can take off' do
     end
+
   end
   
   context 'traffic control' do
 
-    it 'a plane cannot land if the airport is full' do
+    xit 'a plane cannot land if the airport is full' do
     end
     
     # Include a weather condition using a module.
@@ -34,10 +37,10 @@ describe Airport do
 
     context 'weather conditions' do
 
-      it 'a plane cannot take off when there is a storm brewing' do
+      xit 'a plane cannot take off when there is a storm brewing' do
       end
       
-      it 'a plane cannot land in the middle of a storm' do
+      xit 'a plane cannot land in the middle of a storm' do
       end
 
     end
@@ -54,7 +57,7 @@ end
 
 describe "the grand finale (last spec)" do
 
-  it 'all planes can land and all planes can take off' do
+  xit 'all planes can land and all planes can take off' do
   end
   
 end
