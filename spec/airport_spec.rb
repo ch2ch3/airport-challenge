@@ -20,6 +20,9 @@ describe Airport do
     end
     
     it "a plane can take off" do
+      airport.land(plane)
+      airport.take_off(plane)
+      expect(airport.planes).to eq []
     end
 
   end
