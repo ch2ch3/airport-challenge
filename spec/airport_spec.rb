@@ -12,12 +12,14 @@ describe Airport do
   let(:airport) { Airport.new }
   let(:plane)   { Plane.new }
   
-  context 'taking off and landing' do
+  context "taking off and landing" do
 
-    xit 'a plane can land' do
+    it "a plane can land" do
+      airport.land(plane)
+      expect(airport.planes).to eq [plane]
     end
     
-    xit 'a plane can take off' do
+    it "a plane can take off" do
     end
 
   end
