@@ -2,7 +2,7 @@ require 'weather'
 
 class Place; include Weather; end
 
-describe Place do
+shared_examples "a place" do
 
 	it "has a weather" do
 		place = Place.new

@@ -1,4 +1,5 @@
 require 'airport'
+require 'weather_spec'
 
 # A plane currently in the airport can be requested to take off.
 #
@@ -11,6 +12,21 @@ describe Airport do
 
 	let(:airport)        { Airport.new     }
 	let(:plane)          { Plane.new       }
+
+	context "at initialisation" do
+
+		it "has a default capacity" do
+			expect(airport.capacity).to eq 50
+		end
+
+		it "can be initialised with planes" do
+			airport = Airport.new(planes: [plane])
+			expect(airport.planes).to eq [plane]
+		end
+
+		it_behaves_like "a place"
+
+	end
 
 	context "taking off and landing" do
 
