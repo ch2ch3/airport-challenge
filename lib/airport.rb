@@ -21,14 +21,15 @@ class Airport
 	end
 
 	def land(plane)
+		raise "Landing not allowed in a storm!" if stormy?
 		raise "The airport has no more space!" if full?
 		plane.land!
 		planes << plane
 	end
 
 	def take_off(plane)
+		raise "Takeoff not allowed in a storm!" if stormy?
 		raise "That plane isn't here." unless planes.include?(plane)
-		# raise "Takeoff not allowed in a storm!" if storm?
 		planes.delete(plane).take_off!
 	end
 

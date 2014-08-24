@@ -14,7 +14,7 @@ module Weather
 		WEATHER_CONDITIONS.fetch(@weather)
 	end
 
-	def storm?
+	def stormy?
 		@weather == 5
 	end
 

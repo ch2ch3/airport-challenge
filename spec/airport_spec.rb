@@ -1,15 +1,11 @@
 require 'airport'
 require 'weather_spec'
 
-# A plane currently in the airport can be requested to take off
-# It is up to you how many planes can land in the airport and how that is impermented.
-#
-# If the airport is full then no planes can land
-
 describe Airport do
 
-	let(:airport)        { Airport.new     }
-	let(:plane)          { Plane.new       }
+	let(:airport)            { Airport.new                  }
+	let(:airport_with_plane) { Airport.new(planes: [plane]) }
+	let(:plane)              { Plane.new                    }
 
 	context "at initialisation" do
 
@@ -18,8 +14,8 @@ describe Airport do
 		end
 
 		it "can be initialised with planes" do
-			airport = Airport.new(planes: [plane])
-			expect(airport.planes).to eq [plane]
+			airport = Airport.new(planes: [Plane.new, Plane.new])
+			expect(airport.planes.count).to eq 2
 		end
 
 		it_behaves_like "a place"
@@ -29,17 +25,20 @@ describe Airport do
 	context "taking off and landing" do
 
 		it "can land a plane" do
+			expect(airport).to receive(:stormy?).and_return(false)
 			airport.land(plane)
 			expect(airport.planes).to eq [plane]
 		end
 
 		it "can send a plane for take off" do
+			expect(airport).to receive(:stormy?).exactly(2).times.and_return(false)
 			airport.land(plane)
 			airport.take_off(plane)
 			expect(airport.planes).to eq []
 		end
 
 		it "cannot send a plane for take off if it is not currently in the airport" do
+			expect(airport).to receive(:stormy?).and_return(false)
 			expect{ airport.take_off(plane) }.to raise_error
 		end
 
@@ -48,6 +47,7 @@ describe Airport do
 	context "traffic control" do
 
 		it "a plane cannot land if the airport is full" do
+			expect(airport).to receive(:stormy?).exactly(51).times.and_return(false)
 			airport.capacity.times { airport.land(Plane.new) }
 			expect{ airport.land(plane) }.to raise_error
 		end
@@ -62,10 +62,14 @@ describe Airport do
 
 		context "weather conditions" do
 
-			xit "a plane cannot take off when there is a storm brewing" do
+			it "a plane cannot take off when there is a storm brewing" do
+				expect(airport_with_plane).to receive(:stormy?).and_return(true)
+				expect{ airport_with_plane.take_off(plane) }.to raise_error
 			end
 
-			xit 'a plane cannot land in the middle of a storm' do
+			it 'a plane cannot land in the middle of a storm' do
+				expect(airport).to receive(:stormy?).and_return(true)
+				expect{ airport.land(plane) }.to raise_error
 			end
 
 		end
