@@ -10,8 +10,9 @@ shared_examples "a place" do
 	end
 
 	it "is either sunny or stormy" do
+		weather = [:sunny, :stormy]
 		place = Place.new
-		expect(place.weather).to eq :sunny || :stormy
+		expect(weather.include?(place.weather)).to eq true
 	end
 
 end

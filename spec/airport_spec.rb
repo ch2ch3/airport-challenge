@@ -31,6 +31,12 @@ describe Airport do
 			expect(airport.planes).to eq [plane]
 		end
 
+		it "cannot land the same plane twice" do
+			expect(airport).to receive(:stormy?).exactly(2).times.and_return(false)
+			airport.land(plane)
+			expect{ airport.land(plane) }.to raise_error
+		end
+
 		it "can send a plane for take off" do
 			expect(airport).to receive(:stormy?).exactly(2).times.and_return(false)
 			airport.land(plane)
