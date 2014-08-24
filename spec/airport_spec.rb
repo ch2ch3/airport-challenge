@@ -9,50 +9,50 @@ require 'airport'
 
 describe Airport do
 
-    let(:airport) { Airport.new }
-    let(:plane)   { Plane.new }
+	let(:airport)        { Airport.new     }
+	let(:plane)          { Plane.new       }
 
-    context "taking off and landing" do
+	context "taking off and landing" do
 
-        it "a plane can land" do
-            airport.land(plane)
-            expect(airport.planes).to eq [plane]
-        end
+		it "a plane can land" do
+			airport.land(plane)
+			expect(airport.planes).to eq [plane]
+		end
 
-        it "a plane can take off" do
-            airport.land(plane)
-            airport.take_off(plane)
-            expect(airport.planes).to eq []
-        end
+		it "a plane can take off" do
+			airport.land(plane)
+			airport.take_off(plane)
+			expect(airport.planes).to eq []
+		end
 
-    end
+	end
 
-    context "traffic control" do
+	context "traffic control" do
 
-        it "a plane cannot land if the airport is full" do
-            airport.capacity.times { airport.land(Plane.new) }
-            expect{ airport.land(plane) }.to raise_error
-        end
+		it "a plane cannot land if the airport is full" do
+			airport.capacity.times { airport.land(Plane.new) }
+			expect{ airport.land(plane) }.to raise_error
+		end
 
-        # Include a weather condition using a module.
-        # The weather must be random and only have two states "sunny" or "stormy".
-        # Try and take off a plane, but if the weather is stormy, the plane can not take off and must remain in the airport.
-        # 
-        # This will require stubbing to stop the random return of the weather.
-        # If the airport has a weather condition of stormy,
-        # the plane can not land, and must not be in the airport
+		# Include a weather condition using a module.
+		# The weather must be random and only have two states "sunny" or "stormy".
+		# Try and take off a plane, but if the weather is stormy, the plane can not take off and must remain in the airport.
+		# 
+		# This will require stubbing to stop the random return of the weather.
+		# If the airport has a weather condition of stormy,
+		# the plane can not land, and must not be in the airport
 
-        context 'weather conditions' do
+		context "weather conditions" do
 
-            xit 'a plane cannot take off when there is a storm brewing' do
-            end
+			xit "a plane cannot take off when there is a storm brewing" do
+			end
 
-            xit 'a plane cannot land in the middle of a storm' do
-            end
+			xit 'a plane cannot land in the middle of a storm' do
+			end
 
-        end
+		end
 
-    end
+	end
 
 end
 
@@ -64,7 +64,7 @@ end
 
 describe "the grand finale (last spec)" do
 
-    xit 'all planes can land and all planes can take off' do
-    end
+xit 'all planes can land and all planes can take off' do
+end
 
 end

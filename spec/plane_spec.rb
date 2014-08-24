@@ -8,22 +8,19 @@ require 'plane'
 
 describe Plane do
 
-  let(:plane) { Plane.new }
-  
-  it "has a flying status when created" do
-    expect(plane.flying?).to be true
-  end
-  
-  xit 'has a flying status when in the air' do
-  end
-  
-  it "can take off" do
-    expect{ plane.take_off! }.not_to raise_error
-  end
-  
-  it "changes its status to flying after taking off" do
-    plane.take_off!
-    expect(plane.flying?).to be true
-  end
+	let(:plane) { Plane.new }
+
+	it "has a flying status when created" do
+		expect(plane.flying?).to be true
+	end
+
+	it "can take off" do
+		expect{ plane.take_off! }.not_to raise_error
+	end
+
+	it "changes its status to flying after taking off" do
+		plane.take_off!
+		expect(plane.flying?).to be true
+	end
 
 end
