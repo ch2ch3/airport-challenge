@@ -1,4 +1,5 @@
 require 'airport'
+require 'plane'
 require 'weather_spec'
 
 describe Airport do
@@ -52,22 +53,14 @@ describe Airport do
 			expect{ airport.land(plane) }.to raise_error
 		end
 
-		# Include a weather condition using a module.
-		# The weather must be random and only have two states "sunny" or "stormy".
-		# Try and take off a plane, but if the weather is stormy, the plane can not take off and must remain in the airport.
-		# 
-		# This will require stubbing to stop the random return of the weather.
-		# If the airport has a weather condition of stormy,
-		# the plane can not land, and must not be in the airport
-
 		context "weather conditions" do
 
-			it "a plane cannot take off when there is a storm brewing" do
+			it "does not allow a plane to take off when there is a storm" do
 				expect(airport_with_plane).to receive(:stormy?).and_return(true)
 				expect{ airport_with_plane.take_off(plane) }.to raise_error
 			end
 
-			it 'a plane cannot land in the middle of a storm' do
+			it "does not allow a plane to land in the middle of a storm" do
 				expect(airport).to receive(:stormy?).and_return(true)
 				expect{ airport.land(plane) }.to raise_error
 			end
@@ -78,15 +71,62 @@ describe Airport do
 
 end
 
-# grand final
-# Given 6 planes, each plane must land. When the airport is full, every plane must take off again.
-# Be careful of the weather, it could be stormy!
-# Check when all the planes have landed that they have the right status "landed"
-# Once all the planes are in the air again, check that they have the status of flying!
+describe "The Grand Finale" do
 
-describe "the grand finale (last spec)" do
+	let(:airport) { Airport.new(capacity: 6) }
 
-xit 'all planes can land and all planes can take off' do
-end
+	plane_1 = Plane.new
+	plane_2 = Plane.new
+	plane_3 = Plane.new
+	plane_4 = Plane.new
+	plane_5 = Plane.new
+	plane_6 = Plane.new
+
+	TEST_PLANES = [plane_1, plane_2, plane_3, plane_4, plane_5, plane_6]
+
+	def land_all_planes
+		expect(airport).to receive(:stormy?).exactly(6).times.and_return(false)
+		TEST_PLANES.each do |plane|
+			airport.land(plane)
+		end
+	end
+
+	def take_off_all_planes
+		expect(airport).to receive(:stormy?).exactly(6).times.and_return(false)
+		TEST_PLANES.each do |plane|
+			airport.take_off(plane)
+		end
+	end
+
+	it "all planes can land" do
+		land_all_planes
+		expect(airport.planes).to eq [plane_1, plane_2, plane_3, plane_4, plane_5, plane_6]
+	end
+
+	it "airport is full after landing all planes" do
+		land_all_planes
+		expect(airport.full?).to be true
+	end
+
+	it "all planes have a status of landed" do
+		land_all_planes
+		airport.planes.each do |plane|
+			expect(plane.status).to be :landed
+		end
+	end
+
+	it "all planes can take off" do
+		land_all_planes
+		take_off_all_planes
+		expect(airport.planes).to eq []
+	end
+
+	it "all planes have a status of flying" do
+		land_all_planes
+		take_off_all_planes
+		TEST_PLANES.each do |plane|
+			expect(plane.status).to be :flying
+		end
+	end
 
 end

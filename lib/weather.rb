@@ -15,7 +15,7 @@ module Weather
 	end
 
 	def stormy?
-		@weather == 5
+		@weather <= 5
 	end
 
 end
