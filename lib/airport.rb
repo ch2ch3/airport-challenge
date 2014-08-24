@@ -27,9 +27,9 @@ class Airport
 	end
 
 	def take_off(plane)
-		raise "Takeoff not allowed in a storm!" if storm?
-		plane.take_off!
-		planes.delete(plane)
+		raise "That plane isn't here." unless planes.include?(plane)
+		# raise "Takeoff not allowed in a storm!" if storm?
+		planes.delete(plane).take_off!
 	end
 
 	def full?
