@@ -1,6 +1,6 @@
 module Weather
 
-	WEATHER_CONDITIONS = { 1 => :sunny, 2 => :sunny, 3 => :sunny, 4 => :sunny, 5 => :stormy }
+	WEATHER_CONDITIONS = { 1 => :sunny, 2 => :sunny, 3 => :sunny, 4 => :stormy, 5 => :stormy }
 
 	def initialize(options = {})
 		@weather = rand(5) + 1
