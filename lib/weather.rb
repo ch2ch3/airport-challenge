@@ -6,16 +6,18 @@ module Weather
 		@weather = rand(5) + 1
 	end
 
-	def change_weather!
-		@weather = rand(5) + 1
-	end
-
 	def weather
 		WEATHER_CONDITIONS.fetch(@weather)
 	end
 
 	def stormy?
 		@weather >= 4
+	end
+
+	private
+
+	def change_weather!
+		@weather = rand(5) + 1
 	end
 
 end
