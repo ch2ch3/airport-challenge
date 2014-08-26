@@ -9,7 +9,7 @@ describe Plane do
 	end
 
 	it "can take off" do
-		expect{ plane.take_off! }.not_to raise_error
+		expect(plane.respond_to?(:take_off!)).to be true
 	end
 
 	it "changes its status to flying after taking off" do
@@ -18,7 +18,7 @@ describe Plane do
 	end
 
 	it "can land" do
-		expect{ plane.land! }.not_to raise_error
+		expect(plane.respond_to?(:land!)).to be true
 	end
 
 	it "changes its status to landed after landing" do

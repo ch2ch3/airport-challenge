@@ -25,8 +25,7 @@ class Airport
 		raise "Landing not allowed in a storm!" if stormy?
 		raise "The airport has no more space!" if full?
 		raise "The plane has already been landed." if has_landed?(plane)
-		plane.land!
-		planes << plane
+		planes << plane.land!
 	end
 
 
