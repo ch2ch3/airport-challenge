@@ -9,7 +9,6 @@ class Airport
 	def initialize(options = {})
 		@capacity = options.fetch(:capacity, capacity)
 		@planes = options.fetch(:planes, planes)
-		super
 	end
 
 	def capacity
@@ -21,7 +20,6 @@ class Airport
 	end
 
 	def land(plane)
-		change_weather!
 		raise "Landing not allowed in a storm!" if stormy?
 		raise "The airport has no more space!" if full?
 		raise "The plane has already been landed." if has_landed?(plane)
@@ -30,7 +28,6 @@ class Airport
 
 
 	def take_off(plane)
-		change_weather!
 		raise "Takeoff not allowed in a storm!" if stormy?
 		raise "That plane isn't here." unless has_landed?(plane)
 		planes.delete(plane).take_off!
